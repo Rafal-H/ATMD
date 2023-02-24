@@ -93,16 +93,16 @@ def calculate_mass_of_fuselage(mass_estimate, passengers, length, width, floor_p
 # ---Program Start---
 
 # Define Variables
-fuselage_length = 20
-fuselage_width = 3
+fuselage_length = 16.8
+fuselage_width = 4
 
 # Initial Configuration and Weight Guess
 number_of_passengers, _, _, height_of_floor = SeatOptimiser.seat_optimiser(diameter=fuselage_width, length=fuselage_length)
 fuselage_mass = FuselageBuilder.base_weight_for_loads(pax=number_of_passengers)
 
 
-mass_delta_threshold = 10
-max_mass_iterations = 10
+mass_delta_threshold = 100
+max_mass_iterations = 100
 
 mass_convergance_counter = 0
 mass_delta = mass_delta_threshold + 1
@@ -117,4 +117,6 @@ while mass_delta > mass_delta_threshold:
     else:
         mass_convergance_counter += 1
         fuselage_mass = fuselage_mass_new
+
+print('PAX:', number_of_passengers)
 plt.show()
