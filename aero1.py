@@ -152,6 +152,9 @@ def fusDrag(cyLength, cyDiam, tailLength, boatAng):
     cdBase = correctionFactor*ass_succ_coef(size, boatAng)
 
     #final
+
+    #need to add calc for drag of tail planes
+    
     totDragCoef = skinDragCoef + cdBeta + cdBase 
     print("skin Cf: " + str(skinDragCoef))
     print("Cd base: " + str(cdBase))
