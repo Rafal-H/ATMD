@@ -164,12 +164,12 @@ def fusDrag(cyLength, cyDiam, tailLength, boatAng):
     cdBase = correctionFactor*ass_succ_coef(size, boatAng)
     tailPlanesWeight, areaHTP, areaVTP = tail_planes_vals(comTOtail, cyLength, totLength)
     htpDrag = htp_drag(areaHTP)
-    vtpDrag = vtp_drag(areaVTP)
+    vtpDrag = vtp_drag(areaVTP) 
 
 
     #final
 
-    #need to add calc for drag of tail planes 
+    #need to add calc for weight of tail length 
     
     totDragCoef = skinDragCoef + cdBeta + cdBase + htpDrag + vtpDrag
     print("skin Cf: " + str(skinDragCoef))
