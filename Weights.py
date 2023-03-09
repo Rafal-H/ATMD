@@ -32,7 +32,7 @@ def pascal_to_psi(pascal):
     psi = pascal / 6895
     return psi
 
-def tail_planes_weight(comTOtail, cyLength, totLength):
+def tail_planes_vals(comTOtail, cyLength, totLength):
     # variable convention from Raymer pg 576, [desired] units
     p = "placeholder"  # placeholder
     A = 15.78  # aspect ratio
@@ -149,4 +149,7 @@ def tail_planes_weight(comTOtail, cyLength, totLength):
     tailWeight = (horizontalTailWeight+verticalTailWeight)*0.453592 #back to kg
     tailWeight = tailWeight.real
 
-    return(tailWeight)
+    areaHTP = Sht*0.092903
+    areaVTP = Svt*0.092903
+
+    return(tailWeight, areaHTP, areaVTP)

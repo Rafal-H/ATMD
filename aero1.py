@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import bisect
-from Weights import tail_planes_weight
+from Weights import tail_planes_vals
 
 def ass_succ_coef(size, beta):
     #needs ass suction coef cd base from esdu graphs 76033
@@ -132,6 +132,18 @@ def cone_area(r,h):
     area = math.pi * r * (r + math.sqrt(h**2 + r**2))
     return(area)
 
+def vtp_drag(area):
+    stdDrag = 0.0016
+    stdArea = 24.2
+    dragCo = (area/stdArea)*stdDrag
+    return(dragCo)
+
+def htp_drag(area):
+    stdDrag = 0.00185
+    stdArea = 19.477
+    dragCo = (area/stdArea)*stdDrag
+    return(dragCo)
+
 def fusDrag(cyLength, cyDiam, tailLength, boatAng):
     
     #general params
@@ -150,16 +162,20 @@ def fusDrag(cyLength, cyDiam, tailLength, boatAng):
     skinDragCoef = 0.0026 #raymer lol
     cdBeta = correctionFactor*boat_coef(size, boatAng)
     cdBase = correctionFactor*ass_succ_coef(size, boatAng)
+    tailPlanesWeight, areaHTP, areaVTP = tail_planes_vals(comTOtail, cyLength, totLength)
+    htpDrag = htp_drag(areaHTP)
+    vtpDrag = vtp_drag(areaVTP)
+
 
     #final
 
     #need to add calc for drag of tail planes 
     
-    totDragCoef = skinDragCoef + cdBeta + cdBase 
+    totDragCoef = skinDragCoef + cdBeta + cdBase + htpDrag + vtpDrag
     print("skin Cf: " + str(skinDragCoef))
     print("Cd base: " + str(cdBase))
     print("Cd beta: " + str(cdBeta))
-    print("tail planes weight (kg): " +str(tail_planes_weight(comTOtail, cyLength, totLength)))
+    print("tail planes weight (kg): " +str(tailPlanesWeight))
 
     return(totDragCoef)
 
