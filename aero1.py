@@ -172,6 +172,7 @@ def fusDrag(cyLength, cyDiam, tailLength, boatAng):
     #need to add calc for weight of tail length 
     
     totDragCoef = skinDragCoef + cdBeta + cdBase + htpDrag + vtpDrag
+    print("ass diam: " + str(assDiam))
     print("skin Cf: " + str(skinDragCoef))
     print("Cd base: " + str(cdBase))
     print("Cd beta: " + str(cdBeta))
