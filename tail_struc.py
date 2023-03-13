@@ -21,15 +21,16 @@ def tail_struc_weight(tailLength, assDiam, worstForce):
     SF = 1.5
     stressYield = 345e6
     stressShear = 283e6
-    allowStress = stressYield/SF
-    allowShear = stressShear/SF 
+    allowStress = stressYield/SF 
+    allowShear = stressShear/SF
     dens = 2780 #kg per cubic metre 
+    E = 73.1e9 
 
     #iterate to find needed thickness
     thickness = 0.001
     maxStress, maxShear = stresses(rOuter, thickness, maxMom, V)
     while maxStress>allowStress or maxShear>allowShear:
-        thickness += 0.001 
+        thickness += 0.0005
         maxStress, maxShear = stresses(rOuter, thickness, maxMom, V) 
 
     print("thickness: " + str(thickness))
@@ -43,4 +44,4 @@ def tail_struc_weight(tailLength, assDiam, worstForce):
 
     return(tailStrucWeight)
 
-print(str(tail_struc_weight(5, 3, 1000000)))
+print("weight: "+str(tail_struc_weight(5, 3, 500000))) 
