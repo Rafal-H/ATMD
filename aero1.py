@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import bisect
-from Weights import tail_planes_vals
+from tailplanes import tail_planes_vals
 
 def ass_succ_coef(size, beta):
     #needs ass suction coef cd base from esdu graphs 76033
