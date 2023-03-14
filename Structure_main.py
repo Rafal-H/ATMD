@@ -14,8 +14,9 @@ def calculate_mass_of_fuselage(mass_estimate, passengers, length, width, floor_p
     total_booms = large_booms + small_booms + floor_booms
 
     # Simulate singular beam
+    forces = FuselageBuilder.find_loads(length, length+tail_pos, mass_estimate)
     beam_model_moments_shear = FuselageBuilder.calculate_bending_shear_moments(
-        force=FuselageBuilder.find_loads(length, length+tail_pos, mass_estimate),
+        force=forces,
         idealised_fuselage_mass=mass_estimate,
         idealised_fuselage_length=length,
         g_load_case_1=3.5,
@@ -87,7 +88,7 @@ def calculate_mass_of_fuselage(mass_estimate, passengers, length, width, floor_p
                                                                                        system_mass_scaling,
                                                                                        show_weights)
 
-    return total_fuselage_mass, unfurnished_fuselage_mass
+    return total_fuselage_mass, unfurnished_fuselage_mass, forces
 
 
 # ---Program Start---
@@ -116,12 +117,12 @@ def run_fuselage_structure_calcs(fuselage_length, fuselage_width, pos_of_tail):
     # print('Example Furnishings', furnishings + seats)
     # print('Example Systems:', systems)
 
-    fuselage_mass_new = calculate_mass_of_fuselage(fuselage_mass, number_of_passengers, fuselage_length, fuselage_width, height_of_floor, pos_of_tail)
+    fuselage_mass_new, _, _ = calculate_mass_of_fuselage(fuselage_mass, number_of_passengers, fuselage_length, fuselage_width, height_of_floor, pos_of_tail)
 
 
     # Converge on final fuselage mass
     while mass_delta > mass_delta_threshold:
-        fuselage_mass_new, just_struct_fuselage = calculate_mass_of_fuselage(fuselage_mass, number_of_passengers, fuselage_length, fuselage_width, height_of_floor, pos_of_tail)
+        fuselage_mass_new, just_struct_fuselage, forces_on_surfaces = calculate_mass_of_fuselage(fuselage_mass, number_of_passengers, fuselage_length, fuselage_width, height_of_floor, pos_of_tail)
         mass_delta = np.abs(fuselage_mass_new - fuselage_mass)
         if mass_convergance_counter > max_mass_iterations:
             print('NO CONVERGANCE ON MASS AFTER', mass_convergance_counter, 'ITERATIONS')
@@ -134,5 +135,5 @@ def run_fuselage_structure_calcs(fuselage_length, fuselage_width, pos_of_tail):
     # print('PAX:', number_of_passengers)
     # print('Fuselage Mass Fully Loaded:', fuselage_mass)
     # print('Fuselage Structure:', just_struct_fuselage)
-    return number_of_passengers, fuselage_mass, just_struct_fuselage
+    return number_of_passengers, fuselage_mass, just_struct_fuselage, forces_on_surfaces
 
