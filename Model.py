@@ -20,4 +20,4 @@ def full_model(cyLength, cyDiam, tailLength, boatAng):
 
 
 
-    return(numPAX, dragCoef)
+    return(numPAX, dragCoef, totWeight) 
