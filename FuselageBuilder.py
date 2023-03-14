@@ -16,7 +16,7 @@ def pol2cart(theta, r, offset):
 
 
 def base_weight_for_loads(pax):
-    base_fuselage_furnished_weight = 10000
+    base_fuselage_furnished_weight = 19000
     base_pax = 120
     return base_fuselage_furnished_weight * (pax/base_pax)
 
@@ -320,14 +320,17 @@ def euler_buckling(youngs_modulus, Ixx_longeron, boom_stresses_total, boom_area_
     return unsuported_collumn_length, number_of_ribs
 
 
-def weight_estimation(number_of_booms, longeron_cross_sectional_area, skin_thickness, cabin_length, cabin_width, ribs, rib_thickness, rib_porosity, material_density, furnishing_weight, seat_weight, pax, systems_mass, print_weights):
+def weight_estimation(number_of_booms, longeron_cross_sectional_area, skin_thickness, cabin_length, cabin_width, ribs, rib_thickness, rib_porosity, material_density, furnishing_scaling, seat_weight, pax, systems_scaling, print_weights):
     mass_of_booms = number_of_booms * longeron_cross_sectional_area * cabin_length * material_density
     mass_of_skin = np.pi * ((cabin_width / 2) ** 2) * cabin_length * skin_thickness * material_density
     mass_of_ribs = ribs * rib_thickness * np.pi * ((cabin_width / 2) ** 2) * material_density * rib_porosity  # rib porosity how much of a rib is empty as a fraction of circular area (0.1?)
     floor_area_central_plane = cabin_length * cabin_width
 
     empty_fuselage_mass = mass_of_booms + mass_of_skin + mass_of_ribs
-    furnished_fuselage_mass = empty_fuselage_mass + (furnishing_weight * floor_area_central_plane) + (seat_weight * pax) + systems_mass * empty_fuselage_mass
+    furnishing_mass = furnishing_scaling * floor_area_central_plane + seat_weight * pax
+    system_mass = systems_scaling * empty_fuselage_mass
+    payload = 95 * pax
+    furnished_fuselage_mass = empty_fuselage_mass + furnishing_mass + system_mass + payload
 
     if print_weights is True:
         print('All values in KG')
@@ -335,6 +338,9 @@ def weight_estimation(number_of_booms, longeron_cross_sectional_area, skin_thick
         print('Skin:', mass_of_skin)
         print('Ribs:', mass_of_ribs)
         print('Empty Fuselage:', empty_fuselage_mass)
+        print('Furnishings:', furnishing_mass)
+        print('Systems:', system_mass)
+        print('Payload', payload)
         print('Furnished Fuselage', furnished_fuselage_mass)
 
     return empty_fuselage_mass, furnished_fuselage_mass

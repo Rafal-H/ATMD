@@ -32,4 +32,3 @@ def seat_optimiser(diameter, length):
     number_of_rows = np.floor(length_for_seats / seat_params['pitch'])
     pax = number_of_rows * allowed_configurations_seat_number[chosen_config]
     return np.floor(pax), chosen_config, number_of_rows, floor_height
-print(seat_optimiser(4, 16.8))

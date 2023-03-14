@@ -69,11 +69,11 @@ def calculate_mass_of_fuselage(mass_estimate, passengers, length, width, floor_p
 
     # Mass
     thickness_of_ribs = 5e-3
-    rib_scaling_factor = 0.2  # basically porosity
-    furnishing_mass_scaling = 1  # scale to match original plane
+    rib_scaling_factor = 0.5  # basically porosity
+    furnishing_mass_scaling = 20  # scale to match original plane
     seat_mass = 10  # kg per seat
-    system_mass_scaling = 1  # scale to match original plane
-    show_weights = True
+    system_mass_scaling = 0.67  # scale to match original plane
+    show_weights = False
 
     unfurnished_fuselage_mass, total_fuselage_mass = FuselageBuilder.weight_estimation(total_booms, boom_area,
                                                                                        thickness_of_skin, length, width,
@@ -87,14 +87,14 @@ def calculate_mass_of_fuselage(mass_estimate, passengers, length, width, floor_p
                                                                                        system_mass_scaling,
                                                                                        show_weights)
 
-    return total_fuselage_mass
+    return total_fuselage_mass, unfurnished_fuselage_mass
 
 
 # ---Program Start---
 
 # Define Variables
-fuselage_length = 16.8
-fuselage_width = 4
+fuselage_length = 16.8  #16.8
+fuselage_width = 4 # 4
 
 # Initial Configuration and Weight Guess
 number_of_passengers, _, _, height_of_floor = SeatOptimiser.seat_optimiser(diameter=fuselage_width, length=fuselage_length)
@@ -107,9 +107,24 @@ max_mass_iterations = 100
 mass_convergance_counter = 0
 mass_delta = mass_delta_threshold + 1
 
+# # debugging
+# empty_fus = 3199
+# systems = 700 + 560 + 485 + 240 + 70  # Aircon + Avionics + Electrical + Battery + Rat
+# furnishings = 929 + 400 + 48
+# seats = 1200
+# payload = 11400
+# fuselage_mass_manual = empty_fus + systems + furnishings + seats + payload
+# print('Mass from example', fuselage_mass_manual)
+# print('Mass guess from func', fuselage_mass)
+# print('Example Furnishings', furnishings + seats)
+# print('Example Systems:', systems)
+
+fuselage_mass_new = calculate_mass_of_fuselage(fuselage_mass, number_of_passengers, fuselage_length, fuselage_width, height_of_floor)
+
+
 # Converge on final fuselage mass
 while mass_delta > mass_delta_threshold:
-    fuselage_mass_new = calculate_mass_of_fuselage(fuselage_mass, number_of_passengers, fuselage_length, fuselage_width, height_of_floor)
+    fuselage_mass_new, just_struct_fuselage = calculate_mass_of_fuselage(fuselage_mass, number_of_passengers, fuselage_length, fuselage_width, height_of_floor)
     mass_delta = np.abs(fuselage_mass_new - fuselage_mass)
     if mass_convergance_counter > max_mass_iterations:
         print('NO CONVERGANCE ON MASS AFTER', mass_convergance_counter, 'ITERATIONS')
@@ -117,6 +132,9 @@ while mass_delta > mass_delta_threshold:
     else:
         mass_convergance_counter += 1
         fuselage_mass = fuselage_mass_new
+        print('Iteration:', mass_convergance_counter, 'Mass Delta:', mass_delta)
 
 print('PAX:', number_of_passengers)
-plt.show()
+print('Fuselage Mass Fully Loaded:', fuselage_mass)
+print('Fuselage Structure:', just_struct_fuselage)
+
