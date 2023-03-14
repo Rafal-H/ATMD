@@ -15,7 +15,7 @@ def tail_struc_weight(tailLength, assDiam, worstForce):
     #force input
     V = worstForce
     maxMom = -worstForce*tailLength
-    rOuter = assDiam/2
+    rOuter = 0.6*assDiam/2
 
     #material AL 2024-T3
     SF = 1.5
