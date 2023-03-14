@@ -31,7 +31,7 @@ def find_loads(fuselage_length, empennage_position, fus_mass):
     wing_force = base_fuselage_weight / (1 - (com2wing / com2empennage))
     empennage_force = base_fuselage_weight - wing_force
     output = np.array([[wing_position, wing_force], [empennage_position, empennage_force]])
-    print('Wing and Empenage Force:', wing_force, empennage_force)
+    # print('Wing and Empenage Force:', wing_force, empennage_force)
     return output
 
 
