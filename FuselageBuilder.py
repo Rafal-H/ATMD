@@ -21,9 +21,9 @@ def base_weight_for_loads(pax):
     return base_fuselage_furnished_weight * (pax/base_pax)
 
 
-def find_loads(fuselage_length, empennage_position):
-    base_fuselage_mass = 10000
-    base_fuselage_weight = base_fuselage_mass * 9.81
+def find_loads(fuselage_length, empennage_position, fus_mass):
+    #base_fuselage_mass = 10000
+    base_fuselage_weight = fus_mass * 9.81
     com = fuselage_length / 2
     wing_position = 0.55 * fuselage_length
     com2wing = wing_position - com
@@ -31,6 +31,7 @@ def find_loads(fuselage_length, empennage_position):
     wing_force = base_fuselage_weight / (1 - (com2wing / com2empennage))
     empennage_force = base_fuselage_weight - wing_force
     output = np.array([[wing_position, wing_force], [empennage_position, empennage_force]])
+    print('Wing and Empenage Force:', wing_force, empennage_force)
     return output
 
 
