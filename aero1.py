@@ -144,7 +144,7 @@ def htp_drag(area):
     dragCo = (area/stdArea)*stdDrag
     return(dragCo)
 
-def fusDrag(cyLength, cyDiam, tailLength, boatAng):
+def fus_emp_drag(cyLength, cyDiam, tailLength, boatAng):
     
     #general params
     wingArea = 89
@@ -175,15 +175,15 @@ def fusDrag(cyLength, cyDiam, tailLength, boatAng):
     print("ass diam: " + str(assDiam))
     print("skin Cf: " + str(skinDragCoef))
     print("Cd base: " + str(cdBase))
-    print("Cd beta: " + str(cdBeta))
+    print("Cd beta: " + str(cdBeta)) 
     print("tail planes weight (kg): " +str(tailPlanesWeight))
 
-    return(totDragCoef)
+    return(totDragCoef, assDiam)
 
 
 #tests
 #fusDrag(cyLength, cyDiam, tailLength, boatAng)
-print("drag coef: "+str(fusDrag(18, 4, 5, 5))) 
+print("drag coef: "+str(fus_emp_drag(18, 4, 5, 5))) 
 
 
 
