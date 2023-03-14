@@ -8,8 +8,8 @@ from newCd import new_cd
 
 #  This is where we put it all together
 
-def full_model(cyLength, cyDiam, tailLength, boatAng):
-
+def full_model(Z, *args):
+    cyLength, cyDiam, tailLength, boatAng = Z
     #get fuselage mass
     numPAX, loaded_fuselage_mass, fuselage_structure_mass, forces_on_wing_and_tail = run_fuselage_structure_calcs(cyLength, cyDiam, tailLength)
 
@@ -18,15 +18,17 @@ def full_model(cyLength, cyDiam, tailLength, boatAng):
     dragCoef = new_cd(dragCoef)
 
     #get tail planes weight
-    comTOtail = 0.45*cyLength + tailLength 
+    comTOtail = 0.45 * cyLength + tailLength
     totLength = cyLength+tailLength
-    tailPlanesWeight,a,b = tail_planes_vals(comTOtail, cyLength, totLength)
+    tailPlanesWeight, a, b = tail_planes_vals(comTOtail, cyLength, totLength)
 
     #get tail structure weight
-    worstForce = forces_on_wing_and_tail[1,1] 
+    worstForce = forces_on_wing_and_tail[1, 1]
     tailStrucWeight = tail_struc_weight(tailLength, assDiam, worstForce)
 
-    wing_and_engine_weight = 4513 + 4250 + 650
+    # Takes wing and engine weight as ratio equal to example plane
+    wing_and_engine_weight = (4513 + 4250 + 650) * loaded_fuselage_mass / 19130
+
     final_weight = loaded_fuselage_mass + tailPlanesWeight + tailStrucWeight + wing_and_engine_weight
 
     fuel = 3600
@@ -34,14 +36,24 @@ def full_model(cyLength, cyDiam, tailLength, boatAng):
 
     breguet_range_of_original = 800  # nm
 
-    original_weight_fraction =  34919 / (34919 - 3600) 
+    original_weight_fraction = 34919 / (34919 - 3600)
     originalDragCoef = 0.01957 
     breguet_constants = breguet_range_of_original * originalDragCoef / (np.log(original_weight_fraction))
 
     rangeNew = breguet_constants * np.log(final_weight_full_fuel / final_weight) / dragCoef
     passengerMiles = rangeNew * numPAX 
 
-    return(passengerMiles, rangeNew, final_weight_full_fuel)
+    #return(passengerMiles, rangeNew, final_weight_full_fuel)
+    return -passengerMiles
 
-# cabin length, diameter, tail length, boat angle
-print(str(full_model(16.7, 4, 8, 11)))
+
+# cabin length, diameter, tail length, boat angle EXAMPLE MODEL
+print(str(full_model((16.7, 4, 8, 11))))
+
+# Brute Force
+rranges = (slice(15, 20, 1), slice(2.5, 5, 0.5), slice(6, 12, 2), slice(6, 10, 2))
+from scipy import optimize
+resbrute = optimize.brute(full_model, rranges, full_output=True, finish=optimize.fmin, disp=True)
+print(resbrute)
+
+
