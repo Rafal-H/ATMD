@@ -13,7 +13,7 @@ def stresses(rOuter, thickness, maxMom, V):
 
 def tail_struc_weight(tailLength, assDiam, worstForce):
     #force input
-    worstForce = worstForce*50
+    worstForce = worstForce*16.5
     V = worstForce
     maxMom = -worstForce*tailLength
     rOuter = assDiam/2
