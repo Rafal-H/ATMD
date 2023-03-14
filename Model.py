@@ -1,3 +1,5 @@
+import numpy
+
 from aero1 import fus_emp_drag
 from tailplanes import tail_planes_vals
 from tail_struc import tail_struc_weight
@@ -19,13 +21,13 @@ def full_model(cyLength, cyDiam, tailLength, boatAng):
     tailPlanesWeight,a,b = tail_planes_vals(comTOtail, cyLength, totLength)
 
     #get tail structure weight
+    print(forces_on_wing_and_tail(1,1))
+    worstForce = forces_on_wing_and_tail(1,1)
     tailStrucWeight = tail_struc_weight(tailLength, assDiam, worstForce)
 
 
 
 
-
-
-
-
     return(numPAX, dragCoef, totWeight) 
+
+full_model(18, 4, 5, 7)
