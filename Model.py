@@ -21,8 +21,7 @@ def full_model(cyLength, cyDiam, tailLength, boatAng):
     tailPlanesWeight,a,b = tail_planes_vals(comTOtail, cyLength, totLength)
 
     #get tail structure weight
-    print(forces_on_wing_and_tail(1,1))
-    worstForce = forces_on_wing_and_tail(1,1)
+    worstForce = forces_on_wing_and_tail[1,1] 
     tailStrucWeight = tail_struc_weight(tailLength, assDiam, worstForce)
 
 
