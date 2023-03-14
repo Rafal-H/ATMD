@@ -15,13 +15,13 @@ def tail_struc_weight(tailLength, assDiam, worstForce):
     #force input
     V = worstForce
     maxMom = -worstForce*tailLength
-    rOuter = assDiam/2
+    rOuter = 0.6*assDiam/2
 
     #material AL 2024-T3
     SF = 1.5
     stressYield = 345e6
     stressShear = 283e6
-    allowStress = stressYield/SF 
+    allowStress = stressYield/SF
     allowShear = stressShear/SF
     dens = 2780 #kg per cubic metre 
     E = 73.1e9 
