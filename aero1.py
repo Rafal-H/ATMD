@@ -183,5 +183,5 @@ def fus_emp_drag(cyLength, cyDiam, tailLength, boatAng):
 
 #tests
 #fusDrag(cyLength, cyDiam, tailLength, boatAng)
-#print("drag coef: "+str(fus_emp_drag(18, 4, 5, 5))) 
+#print("drag coef: "+str(fus_emp_drag(16.7, 4, 8, 10))) 
 

@@ -34,8 +34,9 @@ def full_model(cyLength, cyDiam, tailLength, boatAng):
 
     breguet_range_of_original = 800  # nm
 
-    original_weight_fraction = (34919 - 3600) / 34919
-    breguet_constants = breguet_range_of_original / (np.log(original_weight_fraction))
+    original_weight_fraction =  34919 / (34919 - 3600) 
+    originalDragCoef = 0.01957 
+    breguet_constants = breguet_range_of_original * originalDragCoef / (np.log(original_weight_fraction))
 
     return(numPAX, dragCoef, totWeight)
 
