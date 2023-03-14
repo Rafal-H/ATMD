@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 
 from aero1 import fus_emp_drag
 from tailplanes import tail_planes_vals
@@ -38,6 +38,9 @@ def full_model(cyLength, cyDiam, tailLength, boatAng):
     originalDragCoef = 0.01957 
     breguet_constants = breguet_range_of_original * originalDragCoef / (np.log(original_weight_fraction))
 
-    return(numPAX, dragCoef, totWeight)
+    rangeNew = breguet_constants * np.log(final_weight_full_fuel / final_weight) / dragCoef
+    passengerMiles = rangeNew * numPAX 
 
-full_model(18, 4, 5, 7)
+    return(passengerMiles)
+
+print(str(full_model(18, 4, 5, 7)))
