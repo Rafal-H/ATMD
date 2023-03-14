@@ -36,10 +36,10 @@ def tail_struc_weight(tailLength, assDiam, worstForce):
 
     deflection = (worstForce*tailLength**3)/(3*E*Ic)
 
-    print("thickness: " + str(thickness))
-    print("max stress: "+str(maxStress) +"  out of: " +str(allowStress))
-    print("max shear: "+str(maxShear) +"  out of: " +str(allowShear))
-    print("deflection: "+ str(deflection))
+    # print("thickness: " + str(thickness))
+    # print("max stress: "+str(maxStress) +"  out of: " +str(allowStress))
+    # print("max shear: "+str(maxShear) +"  out of: " +str(allowShear))
+    # print("deflection: "+ str(deflection))
 
     #calculate weight 
     vol = math.pi * (rOuter**2 - (rOuter-thickness)**2) * tailLength 
