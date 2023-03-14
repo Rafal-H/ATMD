@@ -129,10 +129,10 @@ def run_fuselage_structure_calcs(fuselage_length, fuselage_width, pos_of_tail):
         else:
             mass_convergance_counter += 1
             fuselage_mass = fuselage_mass_new
-            print('Iteration:', mass_convergance_counter, 'Mass Delta:', mass_delta)
+            # print('Iteration:', mass_convergance_counter, 'Mass Delta:', mass_delta)
 
-    print('PAX:', number_of_passengers)
-    print('Fuselage Mass Fully Loaded:', fuselage_mass)
-    print('Fuselage Structure:', just_struct_fuselage)
+    # print('PAX:', number_of_passengers)
+    # print('Fuselage Mass Fully Loaded:', fuselage_mass)
+    # print('Fuselage Structure:', just_struct_fuselage)
     return number_of_passengers, fuselage_mass, just_struct_fuselage
 
