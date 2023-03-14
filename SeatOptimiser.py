@@ -17,7 +17,9 @@ def seat_optimiser(diameter, length):
 
     old_key = '1x'
     for key in allowed_configurations_inch:
-        if inch2meter(allowed_configurations_inch[key]) < max_width_that_fits:
+        if key == '2x3x2':
+            chosen_config = key
+        elif inch2meter(allowed_configurations_inch[key]) < max_width_that_fits:
             old_key = key
         else:
             chosen_config = old_key

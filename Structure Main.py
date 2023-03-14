@@ -94,7 +94,7 @@ def calculate_mass_of_fuselage(mass_estimate, passengers, length, width, floor_p
 
 # Define Variables
 fuselage_length = 16.8  #16.8
-fuselage_width = 4 # 4
+fuselage_width = 4.7  # 4
 
 # Initial Configuration and Weight Guess
 number_of_passengers, _, _, height_of_floor = SeatOptimiser.seat_optimiser(diameter=fuselage_width, length=fuselage_length)
