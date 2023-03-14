@@ -183,13 +183,5 @@ def fus_emp_drag(cyLength, cyDiam, tailLength, boatAng):
 
 #tests
 #fusDrag(cyLength, cyDiam, tailLength, boatAng)
-print("drag coef: "+str(fus_emp_drag(18, 4, 5, 5))) 
+#print("drag coef: "+str(fus_emp_drag(18, 4, 5, 5))) 
 
-
-
-
-
-#how to arrrray
-a = np.array([[1,11],[2,22]])
-x_vals = a[:,0]
-print(x_vals)

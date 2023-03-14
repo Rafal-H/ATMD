@@ -48,4 +48,4 @@ def tail_struc_weight(tailLength, assDiam, worstForce):
 
     return(tailStrucWeight)
 
-print("weight: "+str(tail_struc_weight(5, 3, 12000))) 
+#print("weight: "+str(tail_struc_weight(5, 3, 12000))) 
