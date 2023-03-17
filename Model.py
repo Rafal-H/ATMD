@@ -29,13 +29,14 @@ def full_model(Z, *args):
     # Takes wing and engine weight as ratio equal to example plane
     wing_and_engine_weight = (4513 + 4250 + 650) * loaded_fuselage_mass / 19130
 
+    #total weights
     final_weight = loaded_fuselage_mass + tailPlanesWeight + tailStrucWeight + wing_and_engine_weight
 
     fuel = 3600
     final_weight_full_fuel = final_weight + fuel
 
+    #range calculations
     breguet_range_of_original = 800  # nm
-
     original_weight_fraction = 34919 / (34919 - 3600)
     originalDragCoef = 0.01957 
     breguet_constants = breguet_range_of_original * originalDragCoef / (np.log(original_weight_fraction))
