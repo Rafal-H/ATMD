@@ -8,8 +8,7 @@ from newCd import new_cd
 
 #  This is where we put it all together
 
-def full_model(Z, *args):
-    cyLength, cyDiam, tailLength, boatAng = Z
+def full_model(cyLength, cyDiam, tailLength, boatAng):
     #get fuselage mass
     numPAX, loaded_fuselage_mass, fuselage_structure_mass, forces_on_wing_and_tail = run_fuselage_structure_calcs(cyLength, cyDiam, tailLength)
 
