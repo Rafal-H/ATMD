@@ -43,7 +43,7 @@ def full_model(Z, *args):
 
     rangeNew = breguet_constants * np.log(final_weight_full_fuel / final_weight) / dragCoef
     passengerMiles = rangeNew * numPAX 
-
+    print(passengerMiles)
     #return(passengerMiles, rangeNew, final_weight_full_fuel)
     return -passengerMiles
 
@@ -52,9 +52,9 @@ def full_model(Z, *args):
 #print(str(full_model((16.7, 4, 8, 11))))
 
 # Brute Force
-rranges = (slice(15, 20, 1), slice(2.5, 5, 0.5), slice(6, 12, 2), slice(6, 10, 2))
-from scipy import optimize
-resbrute = optimize.brute(full_model, rranges, full_output=True, finish=optimize.fmin, disp=True)
+#rranges = (slice(15, 20, 1), slice(2.5, 5, 0.5), slice(6, 12, 2), slice(6, 10, 2))
+#from scipy import optimize
+#resbrute = optimize.brute(full_model, rranges, full_output=True, finish=optimize.fmin, disp=True)
 #print(resbrute)
 
 

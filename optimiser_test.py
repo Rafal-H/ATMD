@@ -11,12 +11,11 @@ res = minimize(full_model,
                x0, 
                method='Nelder-Mead', 
                bounds=bnds, 
-               options={"maxiter":10, "maxfev":10, "disp": True, "xatol": 10000000, "fatol": 10000000,} ) 
+               options={"maxiter":100, "maxfev":1000, "disp": True, "xatol": 1000, "fatol": 1000,} ) 
 
-print("\ndone\n") 
 #res = minimize(full_model, x0, method='dogleg')
 #res = dual_annealing(full_model, x0)
 
-#print(res)
-#print(res.x)
-#print(res.message)
+print(res)
+print(res.x)
+print(res.message)
