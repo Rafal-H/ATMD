@@ -1,5 +1,5 @@
 import numpy as np
-
+import matplotlib.pyplot as plt
 from aero1 import fus_emp_drag
 from tailplanes import tail_planes_vals
 from tail_struc import tail_struc_weight
@@ -43,7 +43,7 @@ def full_model(Z, *args):
 
     rangeNew = breguet_constants * np.log(final_weight_full_fuel / final_weight) / dragCoef
     passengerMiles = rangeNew * numPAX 
-    print(passengerMiles)
+    #print(passengerMiles)
     #return(passengerMiles, rangeNew, final_weight_full_fuel)
     return -passengerMiles, final_weight, final_weight_full_fuel
 
@@ -57,4 +57,32 @@ def full_model(Z, *args):
 #resbrute = optimize.brute(full_model, rranges, full_output=True, finish=optimize.fmin, disp=True)
 #print(resbrute)
 
+# cabin length, diameter, tail length, boat angle
+iterations = 11
+widths = [2.5, 3, 3.5, 4, 4.5, 5]
+lengths = np.linspace(10, 30, iterations)
+masses = np.zeros([iterations, len(widths)])
 
+for j in range(len(widths)):
+    for i in range(iterations):
+        ans = full_model([lengths[i], widths[j], 8, 11])
+        weight = ans[2]
+        masses[i, j] = weight
+
+print(masses)
+plt.plot(lengths, masses[:, 0], label='2.5m')
+plt.plot(lengths, masses[:, 1], label='3m')
+plt.plot(lengths, masses[:, 2], label='3.5m')
+plt.plot(lengths, masses[:, 3], label='4m')
+plt.plot(lengths, masses[:, 4], label='4.5m')
+plt.plot(lengths, masses[:, 5], label='5m')
+plt.xlabel('Cabin Length [m]')
+plt.ylabel('MTOW [kg]')
+plt.hlines(34900, lengths[0], 16.46, linestyles='--', colors='red')
+plt.vlines(16.46, masses[0, 0], 34900, linestyles='--', colors='red')
+plt.plot(16.46, 34900, 'rx')
+plt.text(17, 33000, 'Design point', color='red')
+plt.legend(title='Cabin width')
+plt.xlim(10, 30)
+plt.ylim(15000, 90000)
+plt.show()

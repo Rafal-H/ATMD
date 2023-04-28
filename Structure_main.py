@@ -35,12 +35,12 @@ def calculate_mass_of_fuselage(mass_estimate, passengers, length, width, floor_p
         number_of_floor_booms=floor_booms)
 
     # Plot fuselage
-    FuselageBuilder.plot_fuselage_idealised(cart_large_boom, style='gx', draw_fuselage=True, figure=1,
-                                            idealised_fuselage_radius=width / 2, xy_pos_large_booms=cart_large_boom,
-                                            xy_pos_small_booms=cart_small_boom, floor_y_position=floor_position)
-    FuselageBuilder.plot_fuselage_idealised(cart_small_boom, style='gx', draw_fuselage=False, figure=1,
-                                            idealised_fuselage_radius=width / 2, xy_pos_large_booms=cart_large_boom,
-                                            xy_pos_small_booms=cart_small_boom, floor_y_position=floor_position)
+    #FuselageBuilder.plot_fuselage_idealised(cart_large_boom, style='gx', draw_fuselage=True, figure=1,
+                                            #idealised_fuselage_radius=width / 2, xy_pos_large_booms=cart_large_boom,
+                                            #xy_pos_small_booms=cart_small_boom, floor_y_position=floor_position)
+    #FuselageBuilder.plot_fuselage_idealised(cart_small_boom, style='gx', draw_fuselage=False, figure=1,
+                                            #idealised_fuselage_radius=width / 2, xy_pos_large_booms=cart_large_boom,
+                                            #xy_pos_small_booms=cart_small_boom, floor_y_position=floor_position)
 
     # Define Materials
     aluminium_yield_strength = 125000000  # Pa
