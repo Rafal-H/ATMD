@@ -152,14 +152,18 @@ def fus_emp_drag(cyLength, cyDiam, tailLength, boatAng):
     #geometry
     cylinderSurfaceArea = math.pi*cyDiam*cyLength
     assDiam = cyDiam - 2*(tailLength * math.tan(math.radians(boatAng)))
+    if assDiam < 0.005:
+        assDiam = 0.005
+
     assArea = math.pi*(assDiam/2)**2
     correctionFactor = assArea/wingArea
+    correctionFactorFus = cylinderSurfaceArea/wingArea
     size = assDiam/cyDiam 
     comTOtail = 0.45*cyLength + tailLength 
     totLength = cyLength+tailLength
 
     #calcs
-    skinDragCoef = 0.0026 #raymer lol
+    skinDragCoef = correctionFactorFus*0.0026 #raymer lol
     cdBeta = correctionFactor*boat_coef(size, boatAng)
     cdBase = correctionFactor*ass_succ_coef(size, boatAng)
     tailPlanesWeight, areaHTP, areaVTP = tail_planes_vals(comTOtail, cyLength, totLength)
@@ -178,7 +182,7 @@ def fus_emp_drag(cyLength, cyDiam, tailLength, boatAng):
     # print("Cd beta: " + str(cdBeta)) 
     # print("tail planes weight (kg): " +str(tailPlanesWeight))
 
-    return(totDragCoef, assDiam)
+    return(totDragCoef, assDiam, areaHTP, totDragCoef, skinDragCoef, cdBeta, cdBase, htpDrag, vtpDrag)
 
 
 #tests
