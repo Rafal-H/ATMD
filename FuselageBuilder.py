@@ -345,3 +345,7 @@ def weight_estimation(number_of_booms, longeron_cross_sectional_area, skin_thick
         print('Furnished Fuselage', furnished_fuselage_mass)
 
     return empty_fuselage_mass, furnished_fuselage_mass
+
+
+#ans = find_loads(20, 20, 10000)
+#print(ans)
