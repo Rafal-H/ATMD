@@ -45,44 +45,31 @@ def full_model(Z, *args):
     passengerMiles = rangeNew * numPAX 
     #print(passengerMiles)
     #return(passengerMiles, rangeNew, final_weight_full_fuel)
-    return -passengerMiles, final_weight, final_weight_full_fuel
+    return -passengerMiles, final_weight, final_weight_full_fuel, dragCoef, rangeNew
 
-
-# cabin length, diameter, tail length, boat angle EXAMPLE MODEL
-#print(str(full_model((16.7, 4, 8, 11))))
-
-# Brute Force
-#rranges = (slice(15, 20, 1), slice(2.5, 5, 0.5), slice(6, 12, 2), slice(6, 10, 2))
-#from scipy import optimize
-#resbrute = optimize.brute(full_model, rranges, full_output=True, finish=optimize.fmin, disp=True)
-#print(resbrute)
 
 # cabin length, diameter, tail length, boat angle
-iterations = 11
-widths = [2.5, 3, 3.5, 4, 4.5, 5]
-lengths = np.linspace(10, 30, iterations)
-masses = np.zeros([iterations, len(widths)])
+iterations = 80
+angles = [2, 5, 8, 10, 15, 20, 35]
+lengths = np.linspace(2, 20, iterations)
+ranges = np.zeros([iterations, len(angles)])
 
-for j in range(len(widths)):
+for j in range(len(angles)):
     for i in range(iterations):
-        ans = full_model([lengths[i], widths[j], 8, 11])
-        weight = ans[2]
-        masses[i, j] = weight
+        ans = full_model([17, 4, lengths[i], angles[j]])
+        ranges[i, j] = ans[4]
 
-print(masses)
-plt.plot(lengths, masses[:, 0], label='2.5m')
-plt.plot(lengths, masses[:, 1], label='3m')
-plt.plot(lengths, masses[:, 2], label='3.5m')
-plt.plot(lengths, masses[:, 3], label='4m')
-plt.plot(lengths, masses[:, 4], label='4.5m')
-plt.plot(lengths, masses[:, 5], label='5m')
-plt.xlabel('Cabin Length [m]')
-plt.ylabel('MTOW [kg]')
-plt.hlines(34900, lengths[0], 16.46, linestyles='--', colors='red')
-plt.vlines(16.46, masses[0, 0], 34900, linestyles='--', colors='red')
-plt.plot(16.46, 34900, 'rx')
-plt.text(17, 33000, 'Baseline aircraft', color='red')
-plt.legend(title='Cabin width')
-plt.xlim(10, 30)
-plt.ylim(15000, 90000)
+
+plt.plot(lengths, ranges[:, 0], label='2 deg')
+plt.plot(lengths, ranges[:, 1], label='5 deg')
+plt.plot(lengths, ranges[:, 2], label='8 deg')
+plt.plot(lengths, ranges[:, 3], label='10 deg')
+plt.plot(lengths, ranges[:, 4], label='15 deg')
+plt.plot(lengths, ranges[:, 5], label='20 deg')
+plt.plot(lengths, ranges[:, 6], label='35 deg')
+plt.xlabel('Tail Length [m]')
+plt.ylabel('Range [nm]')
+plt.legend(title='Tail angles')
+
 plt.show()
+
