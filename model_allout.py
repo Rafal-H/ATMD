@@ -8,13 +8,13 @@ from newCd import new_cd
 
 #  This is where we put it all together
 
-def full_model(Z, *args):
+def full_model_out(Z, *args):
     cyLength, cyDiam, tailLength, boatAng = Z
     #get fuselage mass
     numPAX, loaded_fuselage_mass, fuselage_structure_mass, forces_on_wing_and_tail = run_fuselage_structure_calcs(cyLength, cyDiam, tailLength)
 
     #get drag coefficient of fuselage + empennage
-    dragCoef, assDiam, _, _, _, _, _, _, _,  = fus_emp_drag(cyLength, cyDiam, tailLength, boatAng)
+    dragCoef, assDiam, _, _, _, _, _, _, _ = fus_emp_drag(cyLength, cyDiam, tailLength, boatAng)
     dragCoef = new_cd(dragCoef)
 
     #get tail planes weight
@@ -42,10 +42,11 @@ def full_model(Z, *args):
     breguet_constants = breguet_range_of_original * originalDragCoef / (np.log(original_weight_fraction))
 
     rangeNew = breguet_constants * np.log(final_weight_full_fuel / final_weight) / dragCoef
-    passengerMiles = rangeNew * numPAX 
-    print(passengerMiles)
+
+    passengerMiles = rangeNew*numPAX
+    print(rangeNew, numPAX, " for ", passengerMiles)
     #return(passengerMiles, rangeNew, final_weight_full_fuel)
-    return -passengerMiles
+    return rangeNew, numPAX, passengerMiles
 
 
 # cabin length, diameter, tail length, boat angle EXAMPLE MODEL

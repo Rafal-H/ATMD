@@ -43,7 +43,7 @@ def tail_struc_weight(tailLength, assDiam, worstForce):
 
     #calculate weight 
     vol = math.pi * (rOuter**2 - (rOuter-thickness)**2) * tailLength 
-    tailStrucWeight = vol*dens  
+    tailStrucWeight = vol*dens  *2 #correction weighting, let him cook
 
 
     return(tailStrucWeight)
