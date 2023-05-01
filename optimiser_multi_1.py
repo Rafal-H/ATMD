@@ -14,10 +14,10 @@ bnds = ((10, 30), (2.4, 10), (0.1,15), (0, 42))
 #range i=1, pax i=0
 max = 1
 i = 1
-res = minimize(full_model, x0, args=(i,max,), method='Nelder-Mead', bounds=bnds, options={"maxiter":100, "maxfev":1000, "disp": True, "xatol": 100, "fatol": 100,} ) 
+res = minimize(full_model, x0, args=(i,max,), method='TNC', bounds=bnds, options={"maxiter":100, "maxfev":1000, "disp": True, "xatol": 100, "fatol": 100,} ) 
 modelRange = res.x
 i = 0
-res = minimize(full_model, x0, args=(i,max,), method='Nelder-Mead', bounds=bnds, options={"maxiter":100, "maxfev":1000, "disp": True, "xatol": 100, "fatol": 100,} ) 
+res = minimize(full_model, x0, args=(i,max,), method='TNC', bounds=bnds, options={"maxiter":100, "maxfev":1000, "disp": True, "xatol": 100, "fatol": 100,} ) 
 modelPAX = res.x
 out1 = full_model_out(modelRange)
 print(out1)
@@ -32,7 +32,7 @@ models = []
 max = 11
 for i in range (0,max,1):
     print("for i = "+str(i))
-    res = minimize(full_model, x0, args=(i,max-1,), method='Nelder-Mead', bounds=bnds, options={"maxiter":100, "maxfev":1000, "disp": True, "xatol": 100, "fatol": 100,} ) 
+    res = minimize(full_model, x0, args=(i,max-1,), method='TNC', bounds=bnds, options={"maxiter":100, "maxfev":1000, "disp": True, "xatol": 100, "fatol": 100,} ) 
     print(res.x)
     models.append(res.x)
 

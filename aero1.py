@@ -145,6 +145,9 @@ def htp_drag(area):
     return(dragCo)
 
 def fus_emp_drag(cyLength, cyDiam, tailLength, boatAng):
+    if boatAng > 44:
+        #stop going out of range, stupid solver 
+        return(9999,9999,9999,9999,9999,9999,9999,9999,9999)
     
     #general params
     wingArea = 89

@@ -10,12 +10,13 @@ def seat_optimiser(diameter, length):
     max_width_that_fits = 2 * np.sqrt((radius ** 2) - (((seat_params['height']) / 2) ** 2))
     floor_height = -seat_params['height'] / 2
 
-    allowed_configurations_inch = {'1x': 39, '1x1': 59, '1x2': 79, '2x2': 86, '2x3': 118, '3x3': 137, '2x2x2': 158,
+    allowed_configurations_inch = {'failSeat': 0, '1x': 39, '1x1': 59, '1x2': 79, '2x2': 86, '2x3': 118, '3x3': 137, '2x2x2': 158,
                                    '2x3x2': 177, '3x3x3': 215}
-    allowed_configurations_seat_number = {'1x': 1, '1x1': 2, '1x2': 3, '2x2': 4, '2x3': 5, '2x1x2': 5,
+    allowed_configurations_seat_number = {'failSeat': 0, '1x': 1, '1x1': 2, '1x2': 3, '2x2': 4, '2x3': 5, '2x1x2': 5,
                                           '2x2x2': 6, '3x3': 6, '2x3x2': 7, '3x3x3': 9}
 
     old_key = '1x'
+    #print("mw ",max_width_that_fits)
     for key in allowed_configurations_inch:
         if inch2meter(allowed_configurations_inch[key]) <= max_width_that_fits:
             chosen_config = key
