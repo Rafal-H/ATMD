@@ -69,7 +69,7 @@ for j in range(len(widths)):
         weight = ans[2]
         masses[i, j] = weight
 
-print(masses)
+
 plt.plot(lengths, masses[:, 0], label='2.5m')
 plt.plot(lengths, masses[:, 1], label='3m')
 plt.plot(lengths, masses[:, 2], label='3.5m')

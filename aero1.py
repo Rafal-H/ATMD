@@ -152,8 +152,8 @@ def fus_emp_drag(cyLength, cyDiam, tailLength, boatAng):
     #geometry
     cylinderSurfaceArea = math.pi*cyDiam*cyLength
     assDiam = cyDiam - 2*(tailLength * math.tan(math.radians(boatAng)))
-    if assDiam < 0.005:
-        assDiam = 0.005
+    if assDiam < 0.05:
+        assDiam = 0.05
 
     assArea = math.pi*(assDiam/2)**2
     correctionFactor = assArea/wingArea

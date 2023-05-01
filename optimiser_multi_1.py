@@ -30,4 +30,4 @@ for count in range(0,10,1):
 plt.plot(-results[:,0], -results[:,1], '+')
 plt.xlabel('range')
 plt.ylabel('PAX')
-plt.show()
+plt.show() 

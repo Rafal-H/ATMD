@@ -13,10 +13,10 @@ def stresses(rOuter, thickness, maxMom, V):
 
 def tail_struc_weight(tailLength, assDiam, worstForce):
     #force input
-    worstForce = worstForce*16.5
+    worstForce = worstForce*1 #what? 
     V = worstForce
     maxMom = -worstForce*tailLength
-    rOuter = assDiam/2
+    rOuter = assDiam /2 
 
     #material AL 2024-T3
     SF = 1.5
@@ -30,11 +30,11 @@ def tail_struc_weight(tailLength, assDiam, worstForce):
     #iterate to find needed thickness
     thickness = 0.001
     maxStress, maxShear, Ic = stresses(rOuter, thickness, maxMom, V)
-    while maxStress>allowStress or maxShear>allowShear:
+    deflection = (worstForce*tailLength**3)/(3*E*Ic)
+    while maxStress>allowStress or maxShear>allowShear or deflection>0.1:
         thickness += 0.0005
         maxStress, maxShear, Ic = stresses(rOuter, thickness, maxMom, V) 
-
-    deflection = (worstForce*tailLength**3)/(3*E*Ic)
+        deflection = (worstForce*tailLength**3)/(3*E*Ic)
 
     # print("thickness: " + str(thickness))
     # print("max stress: "+str(maxStress) +"  out of: " +str(allowStress))
@@ -42,9 +42,15 @@ def tail_struc_weight(tailLength, assDiam, worstForce):
     # print("deflection: "+ str(deflection))
 
     #calculate weight 
+    print("outer: ", rOuter, " inner: ", (rOuter-thickness))
     vol = math.pi * (rOuter**2 - (rOuter-thickness)**2) * tailLength 
-    tailStrucWeight = vol*dens  *2 #correction weighting, let him cook
+    tailStrucWeight = vol*dens   #correction weighting, let him cook
 
+    print("tWeight: ", tailStrucWeight)
+
+    if (rOuter-thickness)<0:
+        print("call tail again ")
+        tailStrucWeight = tail_struc_weight(tailLength, assDiam*1.2, worstForce)
 
     return(tailStrucWeight)
 
