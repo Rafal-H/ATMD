@@ -48,8 +48,9 @@ def full_model(Z, *args):
     w1 = i
     w2 = max-i
     target = -(w1*rangeNew + w2*numPAX )/max
+
     passengerMiles = rangeNew*numPAX
-    print(rangeNew, numPAX, " for ", target)
+    #print(rangeNew, numPAX, " for ", target)
 
     return target
 

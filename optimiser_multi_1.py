@@ -6,33 +6,41 @@ from model_allout import full_model_out
 import matplotlib.pyplot as plt
 
 #cyLength, cyDiam, tailLength, boatAng
-x0 = np.array([16.7, 4, 8, 11])
-#x01 = np.array([13, 3, 3, 4])
+#x0 = np.array([16.7, 4, 8, 11])
+#x0 = np.array([19, 3, 3, 4])
 bnds = ((10, 30), (2.4, 10), (0.1,15), (0, 42))
 
 #utopia
-#range i=1, pax i=0
-max = 1
-i = 1
-res = minimize(full_model, x0, args=(i,max,), method='TNC', bounds=bnds, options={"maxiter":100, "maxfev":1000, "disp": True, "xatol": 100, "fatol": 100,} ) 
-modelRange = res.x
-i = 0
-res = minimize(full_model, x0, args=(i,max,), method='TNC', bounds=bnds, options={"maxiter":100, "maxfev":1000, "disp": True, "xatol": 100, "fatol": 100,} ) 
-modelPAX = res.x
+auto = False
+if auto == True:
+    #range i=1, pax i=0
+    max = 1
+    i = 1
+    res = dual_annealing(full_model, bounds=bnds, args=(i,max,), maxiter=10 ) 
+    modelRange = res.x
+    i = 0
+    res = dual_annealing(full_model, bounds=bnds, args=(i,max,), maxiter=10 ) 
+    modelPAX = res.x
+else:
+    #or just force it
+    modelRange = [10, 2.4, 15, 3.3]
+    modelPAX = [30, 10, 11, 23]
+
+print("range ", modelRange)
+print("pax ", modelPAX)
+
 out1 = full_model_out(modelRange)
-print(out1)
 bestRange = out1[0]
 out2 = full_model_out(modelPAX)
-print(out2)
 bestPAX = out2[1]
 
 
-
+#the good stuff 
 models = []
 max = 11
 for i in range (0,max,1):
     print("for i = "+str(i))
-    res = minimize(full_model, x0, args=(i,max-1,), method='TNC', bounds=bnds, options={"maxiter":100, "maxfev":1000, "disp": True, "xatol": 100, "fatol": 100,} ) 
+    res = dual_annealing(full_model, bounds=bnds, args=(i,max,), maxiter=10 ) 
     print(res.x)
     models.append(res.x)
 
