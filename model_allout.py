@@ -44,7 +44,7 @@ def full_model_out(Z, *args):
     rangeNew = breguet_constants * np.log(final_weight_full_fuel / final_weight) / dragCoef
 
     passengerMiles = rangeNew*numPAX
-    print(rangeNew, numPAX, " for ", passengerMiles)
+    #print(rangeNew, numPAX, " for ", passengerMiles)
     #return(passengerMiles, rangeNew, final_weight_full_fuel)
     return rangeNew, numPAX, passengerMiles
 

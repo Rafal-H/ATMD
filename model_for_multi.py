@@ -11,6 +11,7 @@ from newCd import new_cd
 def full_model(Z, *args):
     cyLength, cyDiam, tailLength, boatAng = Z
     i = args[0]
+    max = args[1]
     #get fuselage mass
     numPAX, loaded_fuselage_mass, fuselage_structure_mass, forces_on_wing_and_tail = run_fuselage_structure_calcs(cyLength, cyDiam, tailLength)
 
@@ -44,12 +45,12 @@ def full_model(Z, *args):
 
     rangeNew = breguet_constants * np.log(final_weight_full_fuel / final_weight) / dragCoef
 
-    w1 = 0+(i-1)*0.1
-    w2 = 1-(i-1)*0.2
-    target = -(w1*rangeNew + w2*numPAX )
+    w1 = i
+    w2 = max-i
+    target = -(w1*rangeNew + w2*numPAX )/max
     passengerMiles = rangeNew*numPAX
     print(rangeNew, numPAX, " for ", target)
-    #return(passengerMiles, rangeNew, final_weight_full_fuel)
+
     return target
 
 

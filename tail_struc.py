@@ -42,15 +42,15 @@ def tail_struc_weight(tailLength, assDiam, worstForce):
     # print("deflection: "+ str(deflection))
 
     #calculate weight 
-    print("outer: ", rOuter, " inner: ", (rOuter-thickness))
+    #print("outer: ", rOuter, " inner: ", (rOuter-thickness))
     vol = math.pi * (rOuter**2 - (rOuter-thickness)**2) * tailLength 
     tailStrucWeight = vol*dens   #correction weighting, let him cook
 
-    print("tWeight: ", tailStrucWeight)
+    #print("tWeight: ", tailStrucWeight)
 
     if (rOuter-thickness)<0:
-        print("call tail again ")
-        tailStrucWeight = tail_struc_weight(tailLength, assDiam*1.2, worstForce)
+        #print("call tail again ")
+        tailStrucWeight = tail_struc_weight(tailLength, assDiam*2, worstForce)
 
     return(tailStrucWeight)
 
