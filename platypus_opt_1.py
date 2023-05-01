@@ -16,9 +16,9 @@ problem.types[3] = Real(0,42)
 problem.function = problemFunc
 problem.directions[:] = Problem.MAXIMIZE 
 
-algorithm = NSGAII(problem)
+algorithm = NSGAII(problem, population_size=300)
 
-algorithm.run(1000)
+algorithm.run(5000)
 
 
 plt.scatter([s.objectives[0] for s in algorithm.result],
