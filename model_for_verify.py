@@ -32,7 +32,7 @@ def full_model(Z, *args):
     #total weights
     final_weight = loaded_fuselage_mass + tailPlanesWeight + tailStrucWeight + wing_and_engine_weight
 
-    fuel = 3600 * wing_and_engine_weight / (4513 + 4250 + 650)
+    fuel = 3600 #* wing_and_engine_weight / (4513 + 4250 + 650)
     final_weight_full_fuel = final_weight + fuel
 
     #range calculations
@@ -78,9 +78,9 @@ plt.plot(lengths, masses[:, 4], label='4.5m')
 plt.plot(lengths, masses[:, 5], label='5m')
 plt.xlabel('Cabin Length [m]')
 plt.ylabel('MTOW [kg]')
-plt.hlines(34900, lengths[0], 16.46, linestyles='--', colors='red')
-plt.vlines(16.46, masses[0, 0], 34900, linestyles='--', colors='red')
-plt.plot(16.46, 34900, 'rx')
+plt.hlines(34900, lengths[0], 16.7, linestyles='--', colors='red')
+plt.vlines(16.7, masses[0, 0], 34900, linestyles='--', colors='red')
+plt.plot(16.7, 34900, 'rx')
 plt.text(17, 33000, 'Baseline aircraft', color='red')
 plt.legend(title='Cabin width')
 plt.xlim(10, 30)
