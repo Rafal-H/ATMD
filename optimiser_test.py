@@ -10,11 +10,10 @@ bnds = ((10, 30), (2.4, 10), (0.1,15), (0, 40))
 
 res = minimize(full_model, 
                x0, 
-               method='TNC', 
+               method='Nelder-Mead', 
                bounds=bnds, 
                options={"maxiter":100, "maxfev":1000, "disp": True, "xatol": 1000, "fatol": 1000,} ) 
 
-#res = minimize(full_model, x0, method='dogleg')
 #res = dual_annealing(full_model, x0)
 
 print(res)

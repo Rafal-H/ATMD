@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 bnds = ((10, 30), (2.4, 10), (0.1,15), (0, 42))
 
 #utopia
-auto = False
+auto = True
 if auto == True:
     #range i=1, pax i=0
     max = 1
