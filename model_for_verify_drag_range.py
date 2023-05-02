@@ -67,7 +67,7 @@ plt.plot(lengths, ranges[:, 3], label='10 deg')
 plt.plot(lengths, ranges[:, 4], label='15 deg')
 plt.plot(lengths, ranges[:, 5], label='20 deg')
 plt.plot(lengths, ranges[:, 6], label='35 deg')
-plt.xlabel('Tail Length [m]')
+plt.xlabel('Empennage Length [m]')
 plt.ylabel('Range [nm]')
 plt.legend(title='Tail angles')
 

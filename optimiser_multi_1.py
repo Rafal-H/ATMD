@@ -40,7 +40,7 @@ models = []
 max = 11
 for i in range (0,max,1):
     print("for i = "+str(i))
-    res = dual_annealing(full_model, bounds=bnds, args=(i,max,), maxiter=10 ) 
+    res = dual_annealing(full_model, bounds=bnds, args=(i,max,), maxiter=10, initial_temp=20000, visit=2.8, no_local_search=True ) 
     print(res.x)
     models.append(res.x)
 
@@ -56,6 +56,6 @@ for count in range(0,max,1):
 
 plt.plot(-results[:,0], -results[:,1], '+')
 plt.plot(-bestRange, -bestPAX, 'rx')
-plt.xlabel('range')
-plt.ylabel('PAX')
+plt.xlabel('-ve Range [nm]')
+plt.ylabel('-ve PAX')
 plt.show() 

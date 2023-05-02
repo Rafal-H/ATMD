@@ -34,7 +34,7 @@ def full_model(Z, *args):
     #total weights
     final_weight = loaded_fuselage_mass + tailPlanesWeight + tailStrucWeight + wing_and_engine_weight
 
-    fuel = 3600
+    fuel = 3600 * wing_and_engine_weight / (4513 + 4250 + 650)
     final_weight_full_fuel = final_weight + fuel
 
     #range calculations

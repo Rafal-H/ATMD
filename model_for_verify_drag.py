@@ -32,7 +32,7 @@ def full_model(Z, *args):
     #total weights
     final_weight = loaded_fuselage_mass + tailPlanesWeight + tailStrucWeight + wing_and_engine_weight
 
-    fuel = 3600
+    fuel = 3600 * wing_and_engine_weight / (4513 + 4250 + 650)
     final_weight_full_fuel = final_weight + fuel
 
     #range calculations
@@ -69,15 +69,15 @@ for i in range(iterations):
 
 
 plt.figure(1)
-plt.plot(lengths, drags[:, 0], label='total drag')
-plt.plot(lengths, drags[:, 1], label='skin drag')
-plt.plot(lengths, drags[:, 2], label='boat tail drag')
-plt.plot(lengths, drags[:, 3], label='base drag')
-plt.plot(lengths, drags[:, 4], label='htp drag')
-plt.plot(lengths, drags[:, 5], label='vtp drag')
+plt.plot(lengths, drags[:, 0], label='Total drag')
+plt.plot(lengths, drags[:, 1], label='Skin drag')
+plt.plot(lengths, drags[:, 2], label='Boat tail drag')
+plt.plot(lengths, drags[:, 3], label='Base drag')
+plt.plot(lengths, drags[:, 4], label='HTP drag')
+plt.plot(lengths, drags[:, 5], label='VTP drag')
 plt.legend()
-plt.xlabel('Tail Length [m]')
-plt.ylabel('Drag coefs')
+plt.xlabel('Empennage Length [m]')
+plt.ylabel('Drag Coefficients')
 #plt.show()
 
 
