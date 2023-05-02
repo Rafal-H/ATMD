@@ -71,9 +71,9 @@ def calculate_mass_of_fuselage(mass_estimate, passengers, length, width, floor_p
     # Mass
     thickness_of_ribs = 5e-3
     rib_scaling_factor = 0.5  # basically porosity
-    furnishing_mass_scaling = 20  # scale to match original plane
+    furnishing_mass_scaling = 19  # scale to match original plane
     seat_mass = 10  # kg per seat
-    system_mass_scaling = 0.67  # scale to match original plane
+    system_mass_scaling = 0.9  # scale to match original plane
     show_weights = False
 
     unfurnished_fuselage_mass, total_fuselage_mass = FuselageBuilder.weight_estimation(total_booms, boom_area,
