@@ -52,7 +52,7 @@ for ini in range(0,len(initials)):
         path[ind,0] = rang
         path[ind,1] = pax
     plt.plot(path[:,0], path[:,1], label=ini, color=cols[ini])
-    plt.plot(path[0,0], path[0,1], 'x', color=cols[ini])
+    plt.plot(path[-1,0], path[-1,1], 'x', color=cols[ini])
 
 
 plt.xlabel('Range [nm]')

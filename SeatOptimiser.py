@@ -15,7 +15,7 @@ def seat_optimiser(diameter, length):
     allowed_configurations_seat_number = {'failSeat': 0, '1x': 1, '1x1': 2, '1x2': 3, '2x2': 4, '2x3': 5, '2x1x2': 5,
                                           '2x2x2': 6, '3x3': 6, '2x3x2': 7, '3x3x3': 9}
 
-    old_key = '1x'
+    chosen_config = 'failSeat'
     #print("mw ",max_width_that_fits)
     for key in allowed_configurations_inch:
         if inch2meter(allowed_configurations_inch[key]) <= max_width_that_fits:
