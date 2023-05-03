@@ -2,7 +2,7 @@ from model_allout import full_model_out
 import numpy as np
 import matplotlib.pyplot as plt
 
-optim = [24.74, 2.57, 14.09, 3.48]
+optim = [24.806892787238745,2.495102258810802,7.590108557252777,6.7059058664457005]
 names = ["Cabin length [m]", "Cabin width [m]", "Empennage length [m]", "Boat-tail angle [deg]"]
 
 for c in range(0,len(optim)):
@@ -11,9 +11,9 @@ for c in range(0,len(optim)):
     _,optyPAX,_ = full_model_out(optim)
     lower = var - 0.5*var
     upper = var + 0.5*var
-    xs = np.linspace(lower, upper, 40)
-    ysRange = np.zeros([40])
-    ysPM = np.zeros([40])
+    xs = np.linspace(lower, upper, 80)
+    ysRange = np.zeros([80])
+    ysPM = np.zeros([80])
     for i in range(0,len(xs)):
         new = xs[i]
         optim_this = [new if item==var else item for item in optim]
@@ -31,9 +31,9 @@ for c in range(0,len(optim)):
     ax1.tick_params(axis='y', labelcolor=color)
 
     if c==2:
-        ax1.set_xlim(7, 18.6)
+        ax1.set_xlim(3.8, 9.4)
     elif c==3:
-        ax1.set_xlim(1.7, 4.6)
+        ax1.set_xlim(3.33, 8.3)
     else:
         pass
 

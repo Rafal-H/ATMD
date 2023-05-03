@@ -6,16 +6,20 @@ import math
 
 def problemFunc(decVars):
     rangeNew, numPAX, passengerMiles = full_model_out(decVars)
-    con = (decVars[2] * math.tan(math.radians(decVars[3]))) - (decVars[1]/2)
-    return ([rangeNew, numPAX], [con])
+    con1 = (decVars[2] * math.tan(math.radians(decVars[3]))) - (decVars[1]/2)
+    con2 = numPAX - 80
+    con3 = numPAX - 160
+    return ([rangeNew, numPAX], [con1,con2,con3],)
 
-problem = Problem(4,2,1)
+problem = Problem(4,2,3)
 #bnds = ((10, 30), (2.4, 10), (0.1,15), (0, 42))
 problem.types[0] = Real(10,30)
 problem.types[1] = Real(2.4,10)
 problem.types[2] = Real(0.1,15)
 problem.types[3] = Real(0,42)
-problem.constraints[:] = "<0.25"
+problem.constraints[0] = "<0.2"
+problem.constraints[1] = ">0"
+problem.constraints[2] = "<0"
 problem.function = problemFunc
 problem.directions[:] = Problem.MAXIMIZE 
 
