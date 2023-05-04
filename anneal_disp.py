@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 iterNum = 1
-it = 100
+it = 1000
 pmVals = [[],[]]
 
 def callFunc(x,f,context):

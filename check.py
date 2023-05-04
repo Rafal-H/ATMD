@@ -24,3 +24,5 @@ res = full_model_out([14.260412579297942,5.594781307901177,14.982335998931505,9.
 print("range: ", res[0], "   pax: ", res[1], "   PM: ", res[2])
 
 #this is for result of nsga2 for single objective, no pax constraint
+res = full_model_out([29.905326764951397,5.7228593920829525,12.927542344331643,13.147665162798608])
+print("range: ", res[0], "   pax: ", res[1], "   PM: ", res[2])

@@ -38,7 +38,7 @@ cols = ['b', 'g', 'y', 'r', 'c', 'm', 'tab:orange']
 
 for i in range(0, len(initials)):
     #res = minimize(full_model, initials[i], method='Nelder-Mead', bounds=bnds, options={"maxiter":500, "disp": True, "return_all": True})
-    res = dual_annealing(full_model, bounds=bnds, maxiter=100, initial_temp=2000, visit=2.8, no_local_search=True ) 
+    res = dual_annealing(full_model, bounds=bnds, maxiter=1000, initial_temp=2000, visit=2.8, no_local_search=True ) 
     print(res.x)
     sols.append(res.x)
     #for c in res.allvecs:

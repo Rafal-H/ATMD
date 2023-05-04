@@ -26,7 +26,7 @@ problem.directions[:] = Problem.MAXIMIZE
 
 algorithm = NSGAII(problem, population_size=100)
 
-algorithm.run(5000)
+algorithm.run(1000)
 
 
 nondominated_solutions = nondominated(algorithm.result)
